@@ -4,7 +4,7 @@
     <ul class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page">
         <span>
-            Overview <i class="fas fa-feather icon-sm text-primary align-middle"></i>
+          <%= gettext "Overview" %> <i class="fas fa-feather icon-sm text-primary align-middle"></i>
         </span>
         </li>
     </ul>

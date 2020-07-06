@@ -8,7 +8,7 @@ defmodule Kaffy.MixProject do
       app: :kaffy,
       version: @version,
       elixir: "~> 1.7",
-      compilers: [:phoenix] ++ Mix.compilers(),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       description: description(),
       package: package(),
@@ -33,7 +33,8 @@ defmodule Kaffy.MixProject do
       {:phoenix, "~> 1.4"},
       {:phoenix_html, "~> 2.11"},
       {:ecto, "~> 3.0"},
-      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
+      {:gettext, "~> 0.18"}
     ]
   end
 
