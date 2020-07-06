@@ -188,6 +188,34 @@ defmodule Kaffy.ResourceSchema do
     end
   end
 
+  def kaffy_field_value(schema, {field, options}) do
+    default_value = kaffy_field_value(schema, field)
+    value = Map.get(options || %{}, :value)
+
+    cond do
+      is_map(value) && Map.has_key?(value, :__struct__) ->
+        if value.__struct__ in [NaiveDateTime, DateTime, Date, Time] do
+          value
+        else
+          Map.from_struct(value)
+          |> Map.drop([:__meta__])
+          |> Kaffy.Utils.json().encode!(escape: :html_safe, pretty: true)
+        end
+
+      is_binary(value) ->
+        value
+
+      is_function(value) ->
+        value.(schema)
+
+      is_map(value) ->
+        Kaffy.Utils.json().encode!(value, escape: :html_safe, pretty: true)
+
+      true ->
+        default_value
+    end
+  end
+
   def kaffy_field_value(schema, field) when is_atom(field) do
     value = Map.get(schema, field, "")
 

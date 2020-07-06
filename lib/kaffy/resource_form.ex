@@ -3,6 +3,7 @@ defmodule Kaffy.ResourceForm do
 
   def form_label_string({field, options}), do: Map.get(options, :label, field)
   def form_label_string(field) when is_atom(field), do: field
+  def form_label_string(field) when is_binary(field), do: field
 
   def form_label(form, field) do
     label_text = form_label_string(field)
